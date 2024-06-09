@@ -30,9 +30,9 @@ struct PackagePreview: View
             {
                 if let packageToPreview
                 {
-                    FullSizeGroupedForm
+                    if !isLoadingPackageDetails
                     {
-                        if !isLoadingPackageDetails
+                        FullSizeGroupedForm
                         {
                             Section
                             {
@@ -85,19 +85,19 @@ struct PackagePreview: View
                                 PackageDependencies(dependencies: dependencies, isDependencyDisclosureGroupExpanded: $isShowingExpandedDependencies)
                             }
                         }
-                        else
-                        {
-                            ProgressView()
-                        }
                     }
-                    .frame(minWidth: 300)
+                    else
+                    {
+                        ProgressView()
+                    }
                 }
                 else
                 {
                     ProgressView()
                 }
             }
-            .task 
+            .frame(minWidth: 300)
+            .task
             {
                 await loadPackageDetails(packageToPreview)
             }
@@ -117,7 +117,7 @@ struct PackagePreview: View
         if let packageToPreview
         {
             isLoadingPackageDetails = true
-            
+
             dependencies = nil
 
             print("Will see info for \(packageToPreview.name)")
