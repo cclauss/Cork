@@ -103,6 +103,7 @@ struct PackagePreview: View
             }
             .onChange(of: packageToPreview)
             { newValue in
+                isLoadingPackageDetails = true /// This has to be here so that the package name doesn't flash when switching packages
                 Task
                 {
                     await loadPackageDetails(newValue)
