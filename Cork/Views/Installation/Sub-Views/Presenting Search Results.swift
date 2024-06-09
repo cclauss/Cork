@@ -74,6 +74,7 @@ struct PresentingSearchResultsView: View
                 } label: {
                     Text(isShowingPackagePreview ? "add-package.preview.close.action" : "add-package.preview.open.action")
                 }
+                .disabled(foundPackageSelection == nil)
 
                 if isSearchFieldFocused
                 {
