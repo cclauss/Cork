@@ -98,7 +98,7 @@ struct PresentingSearchResultsView: View
                         Text("add-package.install.action")
                     }
                     .keyboardShortcut(.defaultAction)
-                    .disabled(foundPackageSelection == nil)
+                    //.disabled(foundPackageSelection == nil)
                 }
             }
         }
