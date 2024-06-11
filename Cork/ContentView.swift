@@ -154,7 +154,7 @@ struct ContentView: View, Sendable
                 }
                 .defaultCustomization(.hidden)
 
-                #warning("TODO: Implement this button")
+                // TODO: Implement this button
                 /*
                  ToolbarItem(id: "installPackageDirectly", placement: .automatic)
                  {

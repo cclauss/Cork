@@ -8,8 +8,7 @@
 import Foundation
 import SwiftUI
 
-@MainActor
-class BrewDataStorage: ObservableObject
+class BrewDataStorage: Tracker
 {
     @Published var installedFormulae: Set<BrewPackage> = .init()
     @Published var installedCasks: Set<BrewPackage> = .init()

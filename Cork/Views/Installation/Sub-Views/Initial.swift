@@ -101,7 +101,7 @@ struct InstallationInitialView: View
                             
                             do
                             {
-                                let packageToInstall: BrewPackage = try getTopPackageFromUUID(requestedPackageUUID: foundPackageSelection, packageType: selectedTopPackageType, topPackageTracker: topPackagesTracker)
+                                let packageToInstall: BrewPackage = try topPackagesTracker.getPackageFromUUID(foundPackageSelection, isCask: selectedTopPackageIsCask)
                                 
                                 installationProgressTracker.packageBeingInstalled = PackageInProgressOfBeingInstalled(package: packageToInstall, installationStage: .ready, packageInstallationProgress: 0)
                                 

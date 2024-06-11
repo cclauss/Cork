@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-class UpdateProgressTracker: ObservableObject
+class UpdateProgressTracker: Tracker
 {
     @Published var updateProgress: Float = 0
     @Published var errors: [String] = .init()

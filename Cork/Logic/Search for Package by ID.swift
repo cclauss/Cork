@@ -7,97 +7,69 @@
 
 import Foundation
 
-
+// MARK: - Search Results
 private enum PackageRetrievalByUUIDError: Error
 {
     case couldNotfindAnypackagesInTracker
 }
 
-func getPackageFromUUID(requestedPackageUUID: UUID, tracker: SearchResultTracker) throws -> BrewPackage
+extension SearchResultTracker
 {
-    
-    var filteredPackage: BrewPackage?
-
-
-    AppConstants.logger.log("Formula tracker: \(tracker.foundFormulae.count)")
-    AppConstants.logger.log("Cask tracker: \(tracker.foundCasks.count)")
-
-    if tracker.foundFormulae.count != 0
+    func getPackageFromUUID(_ requestedUUID: UUID) throws -> BrewPackage
     {
-        filteredPackage = tracker.foundFormulae.filter({ $0.id == requestedPackageUUID }).first
-    }
-
-    if filteredPackage == nil
-    {
-        filteredPackage = tracker.foundCasks.filter({ $0.id == requestedPackageUUID }).first
-    }
-    
-    if let filteredPackage
-    {
-        return filteredPackage
-    }
-    else
-    {
-        throw PackageRetrievalByUUIDError.couldNotfindAnypackagesInTracker
+        var filteredPackage: BrewPackage?
+        
+        AppConstants.logger.log("Formula tracker: \(self.foundFormulae.count)")
+        AppConstants.logger.log("Cask tracker: \(self.foundCasks.count)")
+        
+        if self.foundFormulae.count != 0
+        {
+            filteredPackage = self.foundFormulae.filter({ $0.id == requestedUUID }).first
+        }
+        
+        if filteredPackage == nil
+        {
+            filteredPackage = self.foundCasks.filter({ $0.id == requestedUUID }).first
+        }
+        
+        if let filteredPackage
+        {
+            return filteredPackage
+        }
+        else
+        {
+            throw PackageRetrievalByUUIDError.couldNotfindAnypackagesInTracker
+        }
     }
 }
 
+// MARK: - Top Packages
 enum TopPackageRetrievalError: Error
 {
     case resultingArrayWasEmptyEvenThoughPackagesWereInIt
 }
 
-func getTopPackageFromUUID(requestedPackageUUID: UUID, packageType: PackageType, topPackageTracker: TopPackagesTracker) throws -> BrewPackage
+extension TopPackagesTracker
 {
-    if packageType == .formula
+    func getPackageFromUUID(_ requestedUUID: UUID, isCask: Bool) throws -> BrewPackage
     {
-        guard let foundTopFormula: TopPackage = topPackageTracker.topFormulae.filter({ $0.id == requestedPackageUUID }).first else
+        if !isCask
         {
-            throw TopPackageRetrievalError.resultingArrayWasEmptyEvenThoughPackagesWereInIt
+            guard let foundTopFormula: TopPackage = self.topFormulae.filter({ $0.id == requestedUUID }).first else
+            {
+                throw TopPackageRetrievalError.resultingArrayWasEmptyEvenThoughPackagesWereInIt
+            }
+            
+            return BrewPackage(name: foundTopFormula.packageName, isCask: isCask, installedOn: nil, versions: [], sizeInBytes: nil)
         }
-        
-        return .init(name: foundTopFormula.packageName, type: .formula, installedOn: nil, versions: [], sizeInBytes: nil)
-    }
-    else
-    {
-        guard let foundTopCask: TopPackage = topPackageTracker.topCasks.filter({ $0.id == requestedPackageUUID }).first else
+        else
         {
-            throw TopPackageRetrievalError.resultingArrayWasEmptyEvenThoughPackagesWereInIt
+            guard let foundTopCask: TopPackage = self.topCasks.filter({ $0.id == requestedUUID }).first else
+            {
+                throw TopPackageRetrievalError.resultingArrayWasEmptyEvenThoughPackagesWereInIt
+            }
+            
+            return BrewPackage(name: foundTopCask.packageName, isCask: isCask, installedOn: nil, versions: [], sizeInBytes: nil)
         }
-        
-        return .init(name: foundTopCask.packageName, type: .cask, installedOn: nil, versions: [], sizeInBytes: nil)
     }
 }
-
-/*
-func getPackageNamesFromUUID(selectionBinding: Set<UUID>, tracker: SearchResultTracker) -> [String]
-{
-    let foundFormulae: [SearchResult] = tracker.foundFormulae
-    let foundCasks: [SearchResult] = tracker.foundCasks
-
-    var resultArray = [String]()
-
-    for selection in selectionBinding
-    {
-        /// Step 1: Look through formulae
-        for item in foundFormulae
-        {
-            if selection == item.id
-            {
-                resultArray.append(item.packageName)
-            }
-        }
-
-        /// Step 2: Look through casks
-        for item in foundCasks
-        {
-            if selection == item.id
-            {
-                resultArray.append(item.packageName)
-            }
-        }
-    }
-
-    return resultArray
-}
-*/

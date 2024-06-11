@@ -7,8 +7,7 @@
 
 import Foundation
 
-@MainActor
-class ServicesTracker: ObservableObject
+class ServicesTracker: Tracker
 {
     @Published var services: Set<HomebrewService> = .init()
 

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class InstallationProgressTracker: ObservableObject
+class InstallationProgressTracker: Tracker
 {
     @Published var packageBeingInstalled: PackageInProgressOfBeingInstalled = .init(package: .init(name: "", type: .formula, installedOn: nil, versions: [], sizeInBytes: 0), installationStage: .downloadingCask, packageInstallationProgress: 0)
 

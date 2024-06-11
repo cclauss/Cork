@@ -91,7 +91,7 @@ struct PresentingSearchResultsView: View
         {
             do
             {
-                let packageToInstall: BrewPackage = try getPackageFromUUID(requestedPackageUUID: requestedPackage, tracker: searchResultTracker)
+                let packageToInstall: BrewPackage = try searchResultTracker.getPackageFromUUID(requestedPackage)
 
                 installationProgressTracker.packageBeingInstalled = PackageInProgressOfBeingInstalled(package: packageToInstall, installationStage: .ready, packageInstallationProgress: 0)
 

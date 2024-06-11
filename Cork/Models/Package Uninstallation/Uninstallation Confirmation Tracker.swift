@@ -8,8 +8,7 @@
 import Foundation
 import SwiftUI
 
-@MainActor
-class UninstallationConfirmationTracker: ObservableObject
+class UninstallationConfirmationTracker: Tracker
 {    
     @Published var isShowingUninstallOrPurgeConfirmation: Bool = false
     

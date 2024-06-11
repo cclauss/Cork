@@ -8,8 +8,7 @@
 import Foundation
 import SwiftUI
 
-@MainActor
-class OutdatedPackageTracker: ObservableObject, Sendable
+class OutdatedPackageTracker: Tracker
 {
     @AppStorage("displayOnlyIntentionallyInstalledPackagesByDefault") var displayOnlyIntentionallyInstalledPackagesByDefault: Bool = true
     
@@ -25,5 +24,10 @@ class OutdatedPackageTracker: ObservableObject, Sendable
         {
             return outdatedPackages
         }
+    }
+    
+    func setOutdatedPackages(to packages: Set<OutdatedPackage>)
+    {
+        self.allOutdatedPackages = packages
     }
 }
