@@ -89,11 +89,13 @@ struct PackagePreview: View
                     else
                     {
                         ProgressView()
+                            .frame(minHeight: 0, maxHeight: .infinity)
                     }
                 }
                 else
                 {
                     ProgressView()
+                        .frame(minHeight: 0, maxHeight: .infinity)
                 }
             }
             .frame(minWidth: 300)
