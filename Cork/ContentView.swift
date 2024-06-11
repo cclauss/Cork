@@ -376,7 +376,7 @@ struct ContentView: View, Sendable
         { error in
             switch error
             {
-            case .uninstallationNotPossibleDueToDependency(let packageThatTheUserIsTryingToUninstall, let offendingDependencyProhibitingUninstallation):
+            case .uninstallationNotPossibleDueToDependency:
                 EmptyView()
 
             case .couldNotLoadAnyPackages:
@@ -547,7 +547,7 @@ struct ContentView: View, Sendable
             case .couldNotGetWorkingDirectory:
                 EmptyView()
 
-            case .couldNotDumpBrewfile(error: let error):
+            case .couldNotDumpBrewfile(error: _):
                 EmptyView()
 
             case .couldNotReadBrewfile:

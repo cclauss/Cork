@@ -7,11 +7,10 @@
 
 import Foundation
 import AppKit
-@preconcurrency import UserNotifications
+import UserNotifications
 
 /// Class that holds the global state of the app, excluding services
-@MainActor
-class AppState: ObservableObject 
+class AppState: Tracker
 {
     // MARK: - Licensing
     @Published var licensingState: LicensingState = .notBoughtOrHasNotActivatedDemo
@@ -23,6 +22,7 @@ class AppState: ObservableObject
     // MARK: - Notifications
     @Published var notificationEnabledInSystemSettings: Bool?
     @Published var notificationAuthStatus: UNAuthorizationStatus = .notDetermined
+    @Published var sendStandardUpdatesAvailableNotification: Bool = false
     
     // MARK: - Stuff for controlling various sheets from the menu bar
     @Published var isShowingInstallationSheet: Bool = false
@@ -246,5 +246,13 @@ extension AppState
         }
         
         self.cachedDownloads = cachedDownloadsTracker
+    }
+}
+
+extension AppState
+{
+    func setWhetherToSendStandardUpdatesAvailableNotificaiton(to newValue: Bool)
+    {
+        self.sendStandardUpdatesAvailableNotification = newValue
     }
 }
