@@ -158,7 +158,7 @@ struct CorkApp: App
 
                         Task(priority: .background)
                         {
-                            var updateResult = await shell(AppConstants.brewExecutablePath, ["update"])
+                            let updateResult = await shell(AppConstants.brewExecutablePath, ["update"])
 
                             AppConstants.logger.debug("Update result:\nStandard output: \(updateResult.standardOutput, privacy: .public)\nStandard error: \(updateResult.standardError, privacy: .public)")
 
@@ -171,14 +171,6 @@ struct CorkApp: App
                                 var newOutdatedPackages = temporaryOutdatedPackageTracker.outdatedPackages
 
                                 AppConstants.logger.debug("Outdated packages checker output: \(newOutdatedPackages, privacy: .public)")
-
-                                defer
-                                {
-                                    AppConstants.logger.log("Will purge temporary update trackers")
-
-                                    updateResult = .init(standardOutput: "", standardError: "")
-                                    newOutdatedPackages = .init()
-                                }
 
                                 if await newOutdatedPackages.count > outdatedPackageTracker.allOutdatedPackages.count
                                 {
