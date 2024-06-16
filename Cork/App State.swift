@@ -22,7 +22,6 @@ class AppState: Tracker
     // MARK: - Notifications
     @Published var notificationEnabledInSystemSettings: Bool?
     @Published var notificationAuthStatus: UNAuthorizationStatus = .notDetermined
-    @Published var sendStandardUpdatesAvailableNotification: Bool = false
     
     // MARK: - Stuff for controlling various sheets from the menu bar
     @Published var isShowingInstallationSheet: Bool = false
@@ -246,13 +245,5 @@ extension AppState
         }
         
         self.cachedDownloads = cachedDownloadsTracker
-    }
-}
-
-extension AppState
-{
-    func setWhetherToSendStandardUpdatesAvailableNotificaiton(to newValue: Bool)
-    {
-        self.sendStandardUpdatesAvailableNotification = newValue
     }
 }

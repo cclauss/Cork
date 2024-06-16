@@ -35,6 +35,8 @@ struct CorkApp: App
 
     @AppStorage("areNotificationsEnabled") var areNotificationsEnabled: Bool = false
     @AppStorage("outdatedPackageNotificationType") var outdatedPackageNotificationType: OutdatedPackageNotificationType = .badge
+    
+    @State private var sendStandardUpdatesAvailableNotification: Bool = true
 
     @State private var brewfileContents: String = .init()
     @State private var isShowingBrewfileExporter: Bool = false
@@ -183,7 +185,7 @@ struct CorkApp: App
                                     AppConstants.logger.log("New updates found")
 
                                     /// Set this to `true` so the normal notification doesn't get sent
-                                    await appDelegate.appState.setWhetherToSendStandardUpdatesAvailableNotificaiton(to: false)
+                                    await self.setWhetherToSendStandardUpdatesAvailableNotification(to: false)
 
                                     let differentPackages = await newOutdatedPackages.subtracting(outdatedPackageTracker.outdatedPackages)
                                     AppConstants.logger.debug("Changed packages: \(differentPackages, privacy: .auto)")
@@ -194,7 +196,7 @@ struct CorkApp: App
 
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 1)
                                     {
-                                        appDelegate.appState.setWhetherToSendStandardUpdatesAvailableNotificaiton(to: true)
+                                        self.setWhetherToSendStandardUpdatesAvailableNotification(to: true)
                                     }
                                 }
                                 else
@@ -244,7 +246,7 @@ struct CorkApp: App
 
                                 /// This needs to be checked because when the background update system finds an update, we don't want to send this normal notification.
                                 /// Instead, we want to send a more succinct notification that includes only the new package
-                                if appDelegate.appState.sendStandardUpdatesAvailableNotification
+                                if sendStandardUpdatesAvailableNotification
                                 {
                                     sendNotification(title: String(localized: "notification.outdated-packages-found.title"), subtitle: String(localized: "notification.outdated-packages-found.body-\(outdatedPackageCount)"))
                                 }
@@ -666,5 +668,10 @@ struct CorkApp: App
         {
             NSApp.dockTile.badgeLabel = ""
         }
+    }
+    
+    private func setWhetherToSendStandardUpdatesAvailableNotification(to newValue: Bool)
+    {
+        self.sendStandardUpdatesAvailableNotification = newValue
     }
 }

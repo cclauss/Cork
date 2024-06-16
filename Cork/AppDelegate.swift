@@ -10,6 +10,7 @@ import DavidFoundation
 import Foundation
 import SwiftUI
 
+@MainActor
 final class AppDelegate: NSObject, NSApplicationDelegate
 {
     @AppStorage("showInMenuBar") var showInMenuBar = false
