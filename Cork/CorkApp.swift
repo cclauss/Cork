@@ -164,15 +164,15 @@ struct CorkApp: App
 
                             do
                             {
-                                let temporaryOutdatedPackageTracker: OutdatedPackageTracker = .init()
-
+                                let temporaryOutdatedPackageTracker: OutdatedPackageTracker = await .init()
+                                
                                 try await temporaryOutdatedPackageTracker.getOutdatedPackages(brewData: brewData)
-
-                                var newOutdatedPackages = temporaryOutdatedPackageTracker.outdatedPackages
+                                
+                                let newOutdatedPackages = await temporaryOutdatedPackageTracker.outdatedPackages
 
                                 AppConstants.logger.debug("Outdated packages checker output: \(newOutdatedPackages, privacy: .public)")
 
-                                if await newOutdatedPackages.count > outdatedPackageTracker.allOutdatedPackages.count
+                                if await newOutdatedPackages.count > outdatedPackageTracker.outdatedPackages.count
                                 {
                                     AppConstants.logger.log("New updates found")
 

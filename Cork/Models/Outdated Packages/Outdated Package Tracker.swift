@@ -28,6 +28,6 @@ class OutdatedPackageTracker: Tracker, Sendable
     
     func setOutdatedPackages(to packages: Set<OutdatedPackage>)
     {
-        self.allOutdatedPackages = packages
+        self.outdatedPackages = packages
     }
 }
