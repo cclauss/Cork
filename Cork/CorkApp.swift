@@ -165,9 +165,9 @@ struct CorkApp: App
                             do
                             {
                                 let temporaryOutdatedPackageTracker: OutdatedPackageTracker = .init()
-                                
+
                                 try await temporaryOutdatedPackageTracker.getOutdatedPackages(brewData: brewData)
-                                
+
                                 var newOutdatedPackages = temporaryOutdatedPackageTracker.outdatedPackages
 
                                 AppConstants.logger.debug("Outdated packages checker output: \(newOutdatedPackages, privacy: .public)")
@@ -223,7 +223,6 @@ struct CorkApp: App
                 }
                 .onChange(of: outdatedPackageTracker.displayableOutdatedPackages.count)
                 { outdatedPackageCount in
-
                     AppConstants.logger.debug("Number of displayable outdated packages changed (\(outdatedPackageCount))")
 
                     if outdatedPackageCount == 0

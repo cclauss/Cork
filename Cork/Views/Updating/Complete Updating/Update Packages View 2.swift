@@ -13,7 +13,7 @@ struct UpdatePackagesView: View
 
     @State var packageUpdatingStage: PackageUpdatingStage = .updating
     @State var packageUpdatingStep: PackageUpdatingProcessSteps = .ready
-    
+
     @State var updateAvailability: PackageUpdateAvailability = .updatesAvailable
 
     @EnvironmentObject var appState: AppState
@@ -69,7 +69,7 @@ struct UpdatePackagesView: View
                                 Task(priority: .userInitiated)
                                 {
                                     await upgradePackages(updateProgressTracker, appState: appState, outdatedPackageTracker: outdatedPackageTracker)
-                                    
+
                                     packageUpdatingStep = .updatingOutdatedPackageTracker
                                 }
                             }
@@ -78,11 +78,12 @@ struct UpdatePackagesView: View
                         Text("update-packages.updating.updating-outdated-package")
                             .onAppear
                             {
-                                Task(priority: .userInitiated) {
+                                Task(priority: .userInitiated)
+                                {
                                     outdatedPackageTracker.outdatedPackages = await getListOfUpgradeablePackages()
-                                    
+
                                     updateProgressTracker.updateProgress = 10
-                                    
+
                                     if updateProgressTracker.errors.isEmpty
                                     {
                                         packageUpdatingStage = .finished

@@ -26,12 +26,12 @@ struct UpdatingPackagesStateView: View
             VStack(alignment: .leading, spacing: 3)
             {
                 Text("update-packages.updating.updating")
-                
+
                 SubtitleText(text: updateProcessDetailsStage.currentStage.rawValue)
             }
 
             LiveTerminalOutputView(
-                lineArray: $updateProgressTracker.realTimeOutput, 
+                lineArray: $updateProgressTracker.realTimeOutput,
                 isRealTimeTerminalOutputExpanded: $isShowingRealTimeTerminalOutput
             )
         }

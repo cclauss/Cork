@@ -11,6 +11,6 @@ extension Array
 {
     mutating func prepend(_ element: Element)
     {
-        return self.insert(element, at: 0)
+        return insert(element, at: 0)
     }
 }

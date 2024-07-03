@@ -7,13 +7,14 @@
 
 import SwiftUI
 
-struct PackageDependencies: View {
-
+struct PackageDependencies: View
+{
     let dependencies: [BrewPackageDependency]?
 
     @Binding var isDependencyDisclosureGroupExpanded: Bool
 
-    var body: some View {
+    var body: some View
+    {
         if let dependencies
         {
             Section

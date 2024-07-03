@@ -13,7 +13,7 @@ func getIfPackageWasInstalledAsDependencyFromJSON(json: JSON, package: BrewPacka
     if !package.isCask
     {
         var wasInstalledAsDependency: Bool?
-        
+
         let installationInfos = json["formulae", 0, "installed"].arrayValue
         for installInfo in installationInfos
         {

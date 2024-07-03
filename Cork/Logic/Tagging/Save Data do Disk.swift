@@ -7,7 +7,4 @@
 
 import Foundation
 
-func saveDataToDisk(data: Data, to destinationPath: URL) throws -> Void
-{
-    
-}
+func saveDataToDisk(data _: Data, to _: URL) throws {}

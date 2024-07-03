@@ -9,7 +9,6 @@ import SwiftUI
 
 struct OutdatedPackagesBox: View
 {
-
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var outdatedPackageTracker: OutdatedPackageTracker
 

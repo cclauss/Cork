@@ -81,7 +81,7 @@ struct MaintenanceReadyView: View
                         Button
                         {
                             AppConstants.logger.debug("Start")
-                            
+
                             maintenanceSteps = .maintenanceRunning
                         } label: {
                             Text("maintenance.steps.start")
@@ -89,7 +89,7 @@ struct MaintenanceReadyView: View
                         .keyboardShortcut(.defaultAction)
                         .disabled(isStartDisabled)
                     }
-                    //.padding(.top)
+                    // .padding(.top)
                 }
             }
             .onAppear

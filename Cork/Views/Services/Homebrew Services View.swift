@@ -90,12 +90,12 @@ struct HomebrewServicesView: View
         .task(priority: .userInitiated)
         {
             print("Control active state: \(controlActiveState)")
-            
+
             defer
             {
                 servicesState.isLoadingServices = false
             }
-            
+
             do
             {
                 try await servicesTracker.loadServices()
@@ -106,8 +106,7 @@ struct HomebrewServicesView: View
             }
         }
         .alert(isPresented: $servicesState.isShowingError, error: servicesState.errorToShow)
-        { error in
-            
+        { _ in
         } message: { error in
             Text(error.failureReason)
         }

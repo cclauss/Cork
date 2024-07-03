@@ -17,7 +17,6 @@ func uninstallOrphansUtility() async throws -> Int
 {
     do
     {
-
         let orphanUninstallationOutput = try await uninstallOrphanedPackages()
 
         AppConstants.logger.debug("Orphan removal output:\nStandard output: \(orphanUninstallationOutput.standardOutput, privacy: .public)\nStandard error: \(orphanUninstallationOutput.standardError, privacy: .public)")
@@ -29,9 +28,10 @@ func uninstallOrphansUtility() async throws -> Int
         }
         else
         {
-            let numberOfUninstalledOrphansRegex: String = "(?<=Autoremoving ).*?(?= unneeded)"
+            let numberOfUninstalledOrphansRegex = "(?<=Autoremoving ).*?(?= unneeded)"
 
-            guard let numberOfRemovedOrphans = try Int(regexMatch(from: orphanUninstallationOutput.standardOutput, regex: numberOfUninstalledOrphansRegex)) else
+            guard let numberOfRemovedOrphans = try Int(regexMatch(from: orphanUninstallationOutput.standardOutput, regex: numberOfUninstalledOrphansRegex))
+            else
             {
                 throw OrphanRemovalError.couldNotGetNumberOfUninstalledOrphans
             }

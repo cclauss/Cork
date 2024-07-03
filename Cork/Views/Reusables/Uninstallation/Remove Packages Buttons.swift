@@ -10,7 +10,7 @@ import SwiftUI
 struct UninstallPackageButton: View
 {
     let package: BrewPackage
-    
+
     let isCalledFromSidebar: Bool
 
     var body: some View
@@ -22,7 +22,7 @@ struct UninstallPackageButton: View
 struct PurgePackageButton: View
 {
     let package: BrewPackage
-    
+
     let isCalledFromSidebar: Bool
 
     var body: some View
@@ -34,11 +34,11 @@ struct PurgePackageButton: View
 private struct RemovePackageButton: View
 {
     @AppStorage("shouldRequestPackageRemovalConfirmation") var shouldRequestPackageRemovalConfirmation: Bool = false
-    
+
     @EnvironmentObject var brewData: BrewDataStorage
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var outdatedPackageTracker: OutdatedPackageTracker
-    
+
     @EnvironmentObject var uninstallationConfirmationTracker: UninstallationConfirmationTracker
 
     let package: BrewPackage
@@ -50,28 +50,28 @@ private struct RemovePackageButton: View
     {
         Button(role: .destructive)
         {
-            if !shouldRequestPackageRemovalConfirmation
+            if !self.shouldRequestPackageRemovalConfirmation
             {
                 Task
                 {
                     AppConstants.logger.debug("Confirmation of package removal NOT needed")
-                    
-                    try await brewData.uninstallSelectedPackage(
-                        package: package,
-                        appState: appState,
-                        outdatedPackageTracker: outdatedPackageTracker,
-                        shouldRemoveAllAssociatedFiles: shouldPurge,
-                        shouldApplyUninstallSpinnerToRelevantItemInSidebar: isCalledFromSidebar
+
+                    try await self.brewData.uninstallSelectedPackage(
+                        package: self.package,
+                        appState: self.appState,
+                        outdatedPackageTracker: self.outdatedPackageTracker,
+                        shouldRemoveAllAssociatedFiles: self.shouldPurge,
+                        shouldApplyUninstallSpinnerToRelevantItemInSidebar: self.isCalledFromSidebar
                     )
                 }
             }
             else
             {
                 AppConstants.logger.debug("Confirmation of package removal needed")
-                uninstallationConfirmationTracker.showConfirmationDialog(packageThatNeedsConfirmation: package, shouldPurge: shouldPurge, isCalledFromSidebar: isCalledFromSidebar)
+                self.uninstallationConfirmationTracker.showConfirmationDialog(packageThatNeedsConfirmation: self.package, shouldPurge: self.shouldPurge, isCalledFromSidebar: self.isCalledFromSidebar)
             }
         } label: {
-            Text(shouldPurge ? "action.purge-\(package.name)" : "action.uninstall-\(package.name)")
+            Text(self.shouldPurge ? "action.purge-\(self.package.name)" : "action.uninstall-\(self.package.name)")
         }
     }
 }

@@ -7,23 +7,23 @@
 
 import SwiftUI
 
-struct TapsSection: View {
-    
+struct TapsSection: View
+{
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var availableTaps: AvailableTaps
-    
+
     @EnvironmentObject var selectedTapInfo: SelectedTapInfo
-    
+
     @Binding var searchText: String
-    
-    var body: some View {
+
+    var body: some View
+    {
         Section("sidebar.section.added-taps")
         {
             if availableTaps.addedTaps.count != 0
             {
                 ForEach(searchText.isEmpty || searchText.contains("#") ? availableTaps.addedTaps : availableTaps.addedTaps.filter { $0.name.contains(searchText) })
                 { tap in
-                    
                     NavigationLink(tag: tap.id, selection: $appState.navigationSelection)
                     {
                         TapDetailView(tap: tap, selectedTapInfo: selectedTapInfo)

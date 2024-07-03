@@ -21,7 +21,7 @@ struct PackageDetailView: View, Sendable
     @State private var homepage: URL = .init(string: "https://google.com")!
     @State private var tap: String = ""
     @State private var installedAsDependency: Bool = false
-    @State private var packageDependents: [String]? = nil
+    @State private var packageDependents: [String]?
     @State private var dependencies: [BrewPackageDependency]? = nil
     @State private var outdated: Bool = false
     @State private var caveats: String? = nil

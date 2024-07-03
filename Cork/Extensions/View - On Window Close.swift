@@ -12,9 +12,8 @@ extension View
 {
     func onWindowClose(action: @escaping () -> Void) -> some View
     {
-        self
-            .onReceive(NotificationCenter.default.publisher(for: NSWindow.willCloseNotification), perform: { _ in
-                action()
-            })
+        onReceive(NotificationCenter.default.publisher(for: NSWindow.willCloseNotification), perform: { _ in
+            action()
+        })
     }
 }

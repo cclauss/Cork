@@ -2051,6 +2051,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				63516EF12C32F686005B0911 /* PBXTargetDependency */,
 				C4C2A0E62A9109EB00E6F172 /* PBXTargetDependency */,
 			);
 			name = Cork;
@@ -2119,6 +2120,7 @@
 				63936A4929AE09D00069C988 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 				63689FB42ACFF18900BD354C /* XCRemoteSwiftPackageReference "LaunchAtLogin-Modern" */,
 				63603BA72BBC1C9F0083AEDB /* XCRemoteSwiftPackageReference "DavidFoundation" */,
+				63516EEF2C32F631005B0911 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */,
 			);
 			productRefGroup = 634065622871AA42001A2178 /* Products */;
 			projectDirPath = "";
@@ -2472,6 +2474,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		63516EF12C32F686005B0911 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 63516EF02C32F686005B0911 /* SwiftLintBuildToolPlugin */;
+		};
 		C4C2A0E62A9109EB00E6F172 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = C4C2A0DF2A9108DA00E6F172 /* CorkHelp */;
@@ -2906,6 +2912,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		63516EEF2C32F631005B0911 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SimplyDanny/SwiftLintPlugins";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.55.1;
+			};
+		};
 		63603BA72BBC1C9F0083AEDB /* XCRemoteSwiftPackageReference "DavidFoundation" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/buresdv/DavidFoundation";
@@ -2933,6 +2947,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		63516EF02C32F686005B0911 /* SwiftLintBuildToolPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 63516EEF2C32F631005B0911 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */;
+			productName = "plugin:SwiftLintBuildToolPlugin";
+		};
 		63603BA82BBC1C9F0083AEDB /* DavidFoundation */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 63603BA72BBC1C9F0083AEDB /* XCRemoteSwiftPackageReference "DavidFoundation" */;

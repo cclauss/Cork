@@ -11,18 +11,19 @@ import SwiftUI
 enum TopPackageSorting: Int, Hashable, Identifiable, CaseIterable
 {
     var id: Self { self }
-    
+
     case mostDownloads, fewestDownloads, random
-    
+
     var key: LocalizedStringKey
     {
-        switch self {
-            case .mostDownloads:
-                return "settings.discoverability.sorting.by-most-downloads"
-            case .fewestDownloads:
-                return "settings.discoverability.sorting.by-fewest-downloads"
-            case .random:
-                return "settings.discoverability.sorting.random"
+        switch self
+        {
+        case .mostDownloads:
+            return "settings.discoverability.sorting.by-most-downloads"
+        case .fewestDownloads:
+            return "settings.discoverability.sorting.by-fewest-downloads"
+        case .random:
+            return "settings.discoverability.sorting.random"
         }
     }
 }

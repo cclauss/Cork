@@ -12,7 +12,6 @@ extension View
 {
     @ViewBuilder func fillAvailableSpace() -> some View
     {
-        self
-            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+        frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
     }
 }

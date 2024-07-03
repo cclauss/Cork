@@ -27,11 +27,12 @@ struct BasicPackageInfoView: View
 
     var body: some View
     {
-        Section 
+        Section
         {
             PackageCaveatFullDisplayView(caveats: caveats, isShowingExpandedCaveats: $isShowingExpandedCaveats)
 
-            LabeledContent {
+            LabeledContent
+            {
                 Text(tap)
             } label: {
                 Text("Tap")

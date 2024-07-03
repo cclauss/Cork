@@ -403,6 +403,7 @@ struct ContentView: View, Sendable
                 } label: {
                     Text("action.reset-custom-brew-executable")
                 }
+
             case .couldNotFindPackageUUIDInList:
                 EmptyView()
 
@@ -453,6 +454,7 @@ struct ContentView: View, Sendable
 
                     QuitCorkButton()
                 }
+
             case .metadataFolderDoesNotExist:
                 QuitCorkButton()
 
@@ -492,6 +494,7 @@ struct ContentView: View, Sendable
                 } label: {
                     Text("action.use-without-notifications")
                 }
+
             case .couldNotRemoveTapDueToPackagesFromItStillBeingInstalled(let offendingTapProhibitingRemovalOfTap):
                 EmptyView()
 
@@ -506,6 +509,7 @@ struct ContentView: View, Sendable
                 } label: {
                     Text("action.close")
                 }
+
             case .topPackageArrayFilterCouldNotRetrieveAnyPackages:
                 VStack
                 {
@@ -517,6 +521,7 @@ struct ContentView: View, Sendable
                     }
                     RestartCorkButton()
                 }
+
             case .couldNotAssociateAnyPackageWithProvidedPackageUUID:
                 EmptyView()
 
@@ -540,6 +545,7 @@ struct ContentView: View, Sendable
 
             case .couldNotGetBrewfileLocation:
                 EmptyView()
+
             case .couldNotImportBrewfile:
                 EmptyView()
 

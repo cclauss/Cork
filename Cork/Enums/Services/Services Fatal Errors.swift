@@ -22,9 +22,9 @@ enum ServicesFatalError: LocalizedError
         {
         case .couldNotLoadServices:
             return String(localized: "services.error.could-not-load-services")
-        case let .couldNotStartService(offendingService, _):
+        case .couldNotStartService(let offendingService, _):
             return String(localized: "services.error.could-not-start-service.\(offendingService)")
-        case let .couldNotStopService(offendingService, _):
+        case .couldNotStopService(let offendingService, _):
             return String(localized: "services.error.could-not-stop-service.\(offendingService)")
         case .couldNotSynchronizeServices:
             return String(localized: "services.error.could-not-synchronize-services")
@@ -35,13 +35,13 @@ enum ServicesFatalError: LocalizedError
     {
         switch self
         {
-        case let .couldNotLoadServices(error):
+        case .couldNotLoadServices(let error):
             return error
-        case let .couldNotStartService(_, errorThrown):
+        case .couldNotStartService(_, let errorThrown):
             return errorThrown
-        case let .couldNotStopService(_, errorThrown):
+        case .couldNotStopService(_, let errorThrown):
             return errorThrown
-        case let .couldNotSynchronizeServices(errorThrown):
+        case .couldNotSynchronizeServices(let errorThrown):
             return errorThrown
         }
     }

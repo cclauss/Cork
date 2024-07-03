@@ -9,7 +9,7 @@ import Foundation
 
 struct BrewPackageDependency: Identifiable
 {
-    let id: UUID = UUID()
+    let id: UUID = .init()
     let name: String
     let version: String
     let directlyDeclared: Bool

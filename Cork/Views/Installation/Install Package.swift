@@ -16,7 +16,7 @@ struct AddFormulaView: View
     @EnvironmentObject var brewData: BrewDataStorage
     @EnvironmentObject var appState: AppState
 
-    @State private var foundPackageSelection: UUID? = nil
+    @State private var foundPackageSelection: UUID?
 
     @ObservedObject var searchResultTracker = SearchResultTracker()
     @ObservedObject var installationProgressTracker = InstallationProgressTracker()
@@ -161,7 +161,6 @@ struct AddFormulaView: View
                     }
                 }
                 .fixedSize()
-
                 /*
                  default:
                      VStack(alignment: .leading)

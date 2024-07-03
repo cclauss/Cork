@@ -23,28 +23,28 @@ extension URL
             guard let resourceValues = try? resourceValues(forKeys: [.isDirectoryKey])
             else
             {
-                NSWorkspace.shared.selectFile(self.path, inFileViewerRootedAtPath: self.deletingLastPathComponent().path)
+                NSWorkspace.shared.selectFile(path, inFileViewerRootedAtPath: deletingLastPathComponent().path)
                 return
             }
 
             guard let isDirectory = resourceValues.isDirectory
             else
             {
-                NSWorkspace.shared.selectFile(self.path, inFileViewerRootedAtPath: self.deletingLastPathComponent().path)
+                NSWorkspace.shared.selectFile(path, inFileViewerRootedAtPath: deletingLastPathComponent().path)
                 return
             }
 
             if isDirectory
             {
-                NSWorkspace.shared.selectFile(nil, inFileViewerRootedAtPath: self.path)
+                NSWorkspace.shared.selectFile(nil, inFileViewerRootedAtPath: path)
             }
             else
             {
-                NSWorkspace.shared.selectFile(self.path, inFileViewerRootedAtPath: self.deletingLastPathComponent().path)
+                NSWorkspace.shared.selectFile(path, inFileViewerRootedAtPath: deletingLastPathComponent().path)
             }
 
         case .openParentDirectoryAndHighlightTarget:
-            NSWorkspace.shared.selectFile(self.path, inFileViewerRootedAtPath: self.deletingLastPathComponent().path)
+            NSWorkspace.shared.selectFile(path, inFileViewerRootedAtPath: deletingLastPathComponent().path)
         }
     }
 }

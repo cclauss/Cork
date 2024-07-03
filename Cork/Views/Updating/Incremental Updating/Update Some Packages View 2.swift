@@ -7,17 +7,19 @@
 
 import SwiftUI
 
-struct UpdateSomePackagesView: View {
-    
+struct UpdateSomePackagesView: View
+{
     @EnvironmentObject var outdatedPackageTracker: OutdatedPackageTracker
-    
+
     @Binding var isShowingSheet: Bool
-    
-    var body: some View {
+
+    var body: some View
+    {
         VStack(alignment: .leading, spacing: 10)
         {
             Text("Would update:")
-            ForEach(outdatedPackageTracker.outdatedPackages.filter({ $0.isMarkedForUpdating })) { outdatedPackage in
+            ForEach(outdatedPackageTracker.outdatedPackages.filter { $0.isMarkedForUpdating })
+            { outdatedPackage in
                 Text(outdatedPackage.packageName)
             }
         }

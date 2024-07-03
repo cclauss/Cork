@@ -14,7 +14,6 @@ enum DataDownloadingError: Error
 
 func downloadDataFromURL(_ url: URL, parameters: [URLQueryItem]? = nil) async throws -> Data
 {
-    
     let sessionConfiguration = URLSessionConfiguration.default
     if AppConstants.proxySettings != nil
     {
@@ -24,32 +23,34 @@ func downloadDataFromURL(_ url: URL, parameters: [URLQueryItem]? = nil) async th
             kCFNetworkProxiesHTTPProxy: AppConstants.proxySettings!.host
         ] as [AnyHashable: Any]
     }
-    
-    let session: URLSession = URLSession(configuration: sessionConfiguration)
-    
+
+    let session = URLSession(configuration: sessionConfiguration)
+
     var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
     urlComponents?.queryItems = parameters
-    guard let modifiedURL = urlComponents?.url else {
+    guard let modifiedURL = urlComponents?.url
+    else
+    {
         throw DataDownloadingError.invalidURL
     }
-    
-    var request: URLRequest = URLRequest(url: modifiedURL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10)
-    
+
+    var request = URLRequest(url: modifiedURL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10)
+
     request.httpMethod = "GET"
-    
+
     let (data, response) = try await session.data(for: request)
-    
-    guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else
+
+    guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200
+    else
     {
         AppConstants.logger.error("Received invalid networking response: \(response)")
         throw DataDownloadingError.invalidResponseCode
     }
-    
+
     if data.isEmpty
     {
         throw DataDownloadingError.noDataReceived
     }
-    
+
     return data
 }
-

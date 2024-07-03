@@ -11,6 +11,6 @@ extension String
 {
     func numbersRemoved() -> String
     {
-        return self.components(separatedBy: CharacterSet.decimalDigits).joined()
+        return components(separatedBy: CharacterSet.decimalDigits).joined()
     }
 }

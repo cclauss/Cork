@@ -6,21 +6,23 @@
 //
 
 import Foundation
+import OSLog
 import SwiftyJSON
 import UserNotifications
-import OSLog
 
-struct AppConstants
+enum AppConstants
 {
     // MARK: - Logging
-    static let logger: Logger = Logger(subsystem: "com.davidbures.cork", category: "Cork")
-    
+
+    static let logger: Logger = .init(subsystem: "com.davidbures.cork", category: "Cork")
+
     // MARK: - Notification stuff
+
     static let notificationCenter = UNUserNotificationCenter.current()
-    
+
     // MARK: - Proxy settings
-    static let proxySettings: NetworkProxy? =
-    {
+
+    static let proxySettings: NetworkProxy? = {
         do
         {
             return try getProxySettings()
@@ -30,13 +32,13 @@ struct AppConstants
             switch proxyRetrievalError
             {
             case .couldNotGetProxyStatus:
-                    AppConstants.logger.warning("Could not get proxy status")                    
+                AppConstants.logger.warning("Could not get proxy status")
                 return nil
             case .couldNotGetProxyHost:
-                    AppConstants.logger.warning("Could not get proxy host")
+                AppConstants.logger.warning("Could not get proxy host")
                 return nil
             case .couldNotGetProxyPort:
-                    AppConstants.logger.warning("Could not get proxy port")
+                AppConstants.logger.warning("Could not get proxy port")
                 return nil
             }
         }
@@ -49,14 +51,16 @@ struct AppConstants
 
     // MARK: - Basic executables and file locations
 
-    static let brewExecutablePath: URL =
-    {
+    static let brewExecutablePath: URL = {
         /// If a custom Homebrew path is defined, use it. Otherwise, use the default paths
-        if let homebrewPath = UserDefaults.standard.string(forKey: "customHomebrewPath"), !homebrewPath.isEmpty {
+        if let homebrewPath = UserDefaults.standard.string(forKey: "customHomebrewPath"), !homebrewPath.isEmpty
+        {
             let customHomebrewPath = URL(string: homebrewPath)!
-            
+
             return customHomebrewPath
-        } else {
+        }
+        else
+        {
             if FileManager.default.fileExists(atPath: "/opt/homebrew/bin/brew")
             { // Apple Sillicon
                 return URL(string: "/opt/homebrew/bin/brew")!
@@ -68,8 +72,7 @@ struct AppConstants
         }
     }()
 
-    static let brewCellarPath: URL =
-    {
+    static let brewCellarPath: URL = {
         if FileManager.default.fileExists(atPath: "/opt/homebrew/Cellar")
         { // Apple Sillicon
             return URL(filePath: "/opt/homebrew/Cellar")
@@ -80,8 +83,7 @@ struct AppConstants
         }
     }()
 
-    static let brewCaskPath: URL =
-    {
+    static let brewCaskPath: URL = {
         if FileManager.default.fileExists(atPath: "/opt/homebrew/Caskroom")
         { // Apple Sillicon
             return URL(filePath: "/opt/homebrew/Caskroom")
@@ -92,8 +94,7 @@ struct AppConstants
         }
     }()
 
-    static let tapPath: URL =
-    {
+    static let tapPath: URL = {
         if FileManager.default.fileExists(atPath: "/opt/homebrew/Library/Taps")
         { // Apple Sillicon
             return URL(filePath: "/opt/homebrew/Library/Taps")
@@ -119,22 +120,24 @@ struct AppConstants
 
     /// This one has all the downloaded files themselves
     static let brewCachedDownloadsPath: URL = brewCachePath.appendingPathComponent("downloads", conformingTo: .directory)
-    
+
     // MARK: - Licensing
-    static let demoLengthInSeconds: Double = 604800 // 7 days
-    
-    static let authorizationEndpointURL: URL = URL(string: "https://automation.tomoserver.eu/webhook/38aacca6-5da8-453c-a001-804b15751319")!
+
+    static let demoLengthInSeconds: Double = 604_800 // 7 days
+
+    static let authorizationEndpointURL: URL = .init(string: "https://automation.tomoserver.eu/webhook/38aacca6-5da8-453c-a001-804b15751319")!
     static let licensingAuthorization: (username: String, passphrase: String) = ("cork-authorization", "choosy-defame-neon-resume-cahoots")
-    
+
     // MARK: - Temporary OS version submission
-    static let osSubmissionEndpointURL: URL = URL(string: "https://automation.tomoserver.eu/webhook/3a971576-fa96-479e-9dc4-e052fe33270b")!
-    
+
+    static let osSubmissionEndpointURL: URL = .init(string: "https://automation.tomoserver.eu/webhook/3a971576-fa96-479e-9dc4-e052fe33270b")!
+
     // MARK: - Misc Stuff
+
     static let backgroundUpdateInterval: TimeInterval = 10 * 60
     static let backgroundUpdateIntervalTolerance: TimeInterval = 1 * 60
 
-    static let osVersionString: (lookupName: String, fullName: String) =
-    {
+    static let osVersionString: (lookupName: String, fullName: String) = {
         let versionDictionary: [Int: (lookupName: String, fullName: String)] = [
             14: ("sonoma", "Sonoma"),
             13: ("ventura", "Ventura"),

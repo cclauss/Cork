@@ -16,7 +16,7 @@ struct SearchResultRow: View, Sendable
 
     @State var packageName: String
     @State var isCask: Bool
-    
+
     @State private var description: String = ""
     @State private var isCompatible: Bool?
 
@@ -52,7 +52,8 @@ struct SearchResultRow: View, Sendable
                     {
                         if showCompatibilityWarning
                         {
-                            HStack(alignment: .center, spacing: 4) {
+                            HStack(alignment: .center, spacing: 4)
+                            {
                                 Image(systemName: "exclamationmark.circle")
                                 Text("add-package.result.not-optimized-for-\(AppConstants.osVersionString.fullName)")
                             }
@@ -62,7 +63,7 @@ struct SearchResultRow: View, Sendable
                     }
                 }
             }
-            
+
             if showDescriptionsInSearchResults
             {
                 if !descriptionParsingFailed
@@ -95,7 +96,6 @@ struct SearchResultRow: View, Sendable
                         .foregroundColor(.orange)
                 }
             }
-            
         }
         .task
         {

@@ -25,11 +25,11 @@ struct PackageModificationButtons: View
 
     var body: some View
     {
-        if let _ = package.installedOn // Only show the uninstall button for packages that are actually installed
+        if package.installedOn != nil // Only show the uninstall button for packages that are actually installed
         {
             if !isLoadingDetails
             {
-                ButtonBottomRow 
+                ButtonBottomRow
                 {
                     if !package.isCask
                     {
@@ -75,7 +75,7 @@ struct PackageModificationButtons: View
                                     Task
                                     {
                                         AppConstants.logger.debug("Confirmation of package removal NOT needed")
-                                        
+
                                         try await brewData.uninstallSelectedPackage(
                                             package: package,
                                             appState: appState,

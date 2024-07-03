@@ -15,13 +15,17 @@ enum ProxyRetrievalError: Error
 func getProxySettings() throws -> NetworkProxy?
 {
     let proxySettings = CFNetworkCopySystemProxySettings()?.takeUnretainedValue() as? [String: Any]
-    
-    guard let httpProxyHost = proxySettings?[kCFNetworkProxiesHTTPProxy as String] as? String else {
+
+    guard let httpProxyHost = proxySettings?[kCFNetworkProxiesHTTPProxy as String] as? String
+    else
+    {
         throw ProxyRetrievalError.couldNotGetProxyHost
     }
-    guard let httpProxyPort = proxySettings?[kCFNetworkProxiesHTTPPort as String] as? Int else {
+    guard let httpProxyPort = proxySettings?[kCFNetworkProxiesHTTPPort as String] as? Int
+    else
+    {
         throw ProxyRetrievalError.couldNotGetProxyPort
     }
-    
+
     return NetworkProxy(host: httpProxyHost, port: httpProxyPort)
 }

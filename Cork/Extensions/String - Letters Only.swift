@@ -7,9 +7,9 @@
 
 import Foundation
 
-extension String 
+extension String
 {
-    var onlyLetters: String 
+    var onlyLetters: String
     {
         return String(unicodeScalars.filter(CharacterSet.letters.contains))
     }

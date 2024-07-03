@@ -10,13 +10,14 @@ import SwiftyJSON
 
 func getFormulaeAvailableFromTap(json: JSON, tap: BrewTap) -> Set<String>?
 {
-    var availableFormulae: Set<String>? = nil
+    var availableFormulae: Set<String>?
 
     let availableFormulaeFromTap = json[0, "formula_names"].arrayValue
-    
-    for availableFormula in availableFormulaeFromTap {
+
+    for availableFormula in availableFormulaeFromTap
+    {
         let availableFormulaFinal = availableFormula.stringValue.replacingOccurrences(of: "\(tap.name)/", with: "")
-        
+
         if availableFormulae == nil
         {
             availableFormulae = [availableFormulaFinal]
@@ -26,7 +27,7 @@ func getFormulaeAvailableFromTap(json: JSON, tap: BrewTap) -> Set<String>?
             availableFormulae?.insert(availableFormulaFinal)
         }
     }
-    
+
     if let availableFormulae
     {
         AppConstants.logger.debug("Found formulae in tap \(tap.name, privacy: .public): \(availableFormulae.sorted())")
@@ -35,6 +36,6 @@ func getFormulaeAvailableFromTap(json: JSON, tap: BrewTap) -> Set<String>?
     {
         AppConstants.logger.warning("Couldn't find any formulae in tap \(tap.name, privacy: .public)")
     }
-    
+
     return availableFormulae
 }

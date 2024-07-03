@@ -10,7 +10,7 @@ import SwiftUI
 struct OutdatedPackageListBox: View
 {
     @AppStorage("displayOnlyIntentionallyInstalledPackagesByDefault") var displayOnlyIntentionallyInstalledPackagesByDefault: Bool = true
-    
+
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var outdatedPackageTracker: OutdatedPackageTracker
 
@@ -18,7 +18,7 @@ struct OutdatedPackageListBox: View
 
     private var packagesMarkedForUpdating: [OutdatedPackage]
     {
-        return outdatedPackageTracker.displayableOutdatedPackages.filter({ $0.isMarkedForUpdating })
+        return outdatedPackageTracker.displayableOutdatedPackages.filter { $0.isMarkedForUpdating }
     }
 
     var body: some View
@@ -73,16 +73,18 @@ struct OutdatedPackageListBox: View
                                                 get: {
                                                     outdatedPackage.isMarkedForUpdating
                                                 }, set: { toggleState in
-                                                    outdatedPackageTracker.outdatedPackages = Set(outdatedPackageTracker.outdatedPackages.map({ modifiedElement in
+                                                    outdatedPackageTracker.outdatedPackages = Set(outdatedPackageTracker.outdatedPackages.map
+                                                    { modifiedElement in
                                                         var copyOutdatedPackage = modifiedElement
                                                         if copyOutdatedPackage.id == outdatedPackage.id
                                                         {
                                                             copyOutdatedPackage.isMarkedForUpdating = toggleState
                                                         }
                                                         return copyOutdatedPackage
-                                                    }))
+                                                    })
                                                 }
-                                            )) {
+                                            ))
+                                            {
                                                 SanitizedPackageName(packageName: outdatedPackage.package.name, shouldShowVersion: true)
                                             }
                                         }
@@ -91,14 +93,15 @@ struct OutdatedPackageListBox: View
                                         {
                                             Button
                                             {
-                                                outdatedPackageTracker.outdatedPackages = Set(outdatedPackageTracker.outdatedPackages.map({ modifiedElement in
+                                                outdatedPackageTracker.outdatedPackages = Set(outdatedPackageTracker.outdatedPackages.map
+                                                { modifiedElement in
                                                     var copyOutdatedPackage = modifiedElement
                                                     if copyOutdatedPackage.id == modifiedElement.id
                                                     {
                                                         copyOutdatedPackage.isMarkedForUpdating = false
                                                     }
                                                     return copyOutdatedPackage
-                                                }))
+                                                })
                                             } label: {
                                                 Text("start-page.updated.action.deselect-all")
                                             }
@@ -107,14 +110,15 @@ struct OutdatedPackageListBox: View
 
                                             Button
                                             {
-                                                outdatedPackageTracker.outdatedPackages = Set(outdatedPackageTracker.outdatedPackages.map({ modifiedElement in
+                                                outdatedPackageTracker.outdatedPackages = Set(outdatedPackageTracker.outdatedPackages.map
+                                                { modifiedElement in
                                                     var copyOutdatedPackage = modifiedElement
                                                     if copyOutdatedPackage.id == modifiedElement.id
                                                     {
                                                         copyOutdatedPackage.isMarkedForUpdating = true
                                                     }
                                                     return copyOutdatedPackage
-                                                }))
+                                                })
                                             } label: {
                                                 Text("start-page.updated.action.select-all")
                                             }

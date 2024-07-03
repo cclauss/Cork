@@ -10,10 +10,11 @@ import SwiftyJSON
 
 func getTapHomepageFromJSON(json: JSON) -> URL?
 {
-    guard let tapHomepage: URL = URL(string: json[0, "remote"].stringValue) else
+    guard let tapHomepage = URL(string: json[0, "remote"].stringValue)
+    else
     {
         return nil
     }
-    
+
     return tapHomepage
 }

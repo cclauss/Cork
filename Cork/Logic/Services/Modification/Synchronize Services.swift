@@ -14,11 +14,11 @@ extension ServicesTracker
         do
         {
             let dummyServicesState: ServicesState = .init()
-            
+
             let dummyServicesTracker: ServicesTracker = .init()
-            
+
             try await dummyServicesTracker.loadServices()
-            
+
             let updatedServices: Set<HomebrewService> = dummyServicesTracker.services
 
             if !preserveIDs
@@ -34,9 +34,8 @@ extension ServicesTracker
 
                 let updatedServicesWithOldIDs: Set<HomebrewService> = Set(updatedServices.map
                 { updatedService in
-                    
                     var copyUpdatedService = updatedService
-                    
+
                     for originalServiceWithItsOldUUID in originalServicesWithTheirUUIDs
                     {
                         if originalServiceWithItsOldUUID.key == copyUpdatedService.name
@@ -44,10 +43,10 @@ extension ServicesTracker
                             copyUpdatedService.id = originalServiceWithItsOldUUID.value
                         }
                     }
-                    
+
                     return copyUpdatedService
                 })
-                
+
                 services = updatedServicesWithOldIDs
             }
         }

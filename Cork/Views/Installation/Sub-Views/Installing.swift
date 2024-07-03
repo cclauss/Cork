@@ -70,6 +70,7 @@ struct InstallingPackageView: View
                                 {
                                     packageInstallationProcessStep = .requiresSudoPassword
                                 }
+
                         case .wrongArchitecture:
                             Text("add-package.install.wrong-architecture.title")
                                 .onAppear

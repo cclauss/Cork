@@ -5,8 +5,8 @@
 //  Created by David Bureš on 15.02.2023.
 //
 
-import SwiftUI
 import LaunchAtLogin
+import SwiftUI
 
 struct GeneralPane: View
 {
@@ -14,12 +14,12 @@ struct GeneralPane: View
     @AppStorage("displayAdvancedDependencies") var displayAdvancedDependencies: Bool = false
 
     @AppStorage("displayOnlyIntentionallyInstalledPackagesByDefault") var displayOnlyIntentionallyInstalledPackagesByDefault: Bool = true
-    
+
     @AppStorage("caveatDisplayOptions") var caveatDisplayOptions: PackageCaveatDisplay = .full
     @AppStorage("showDescriptionsInSearchResults") var showDescriptionsInSearchResults: Bool = false
-    
+
     @AppStorage("enableRevealInFinder") var enableRevealInFinder: Bool = false
-    
+
     @AppStorage("showSearchFieldForDependenciesInPackageDetails") var showSearchFieldForDependenciesInPackageDetails: Bool = false
 
     @AppStorage("showInMenuBar") var showInMenuBar = false
@@ -66,7 +66,7 @@ struct GeneralPane: View
                     Text("settings.general.display-only-intentionally-installed-packages")
                 }
                 .pickerStyle(.radioGroup)
-                
+
                 Picker(selection: $caveatDisplayOptions)
                 {
                     Text("settings.general.package-caveats.full")
@@ -98,11 +98,13 @@ struct GeneralPane: View
                 {
                     VStack(alignment: .leading)
                     {
-                        Toggle(isOn: $showSearchFieldForDependenciesInPackageDetails) {
+                        Toggle(isOn: $showSearchFieldForDependenciesInPackageDetails)
+                        {
                             Text("settings.general.package-details.toggle")
                         }
-                        
-                        Toggle(isOn: $enableRevealInFinder) {
+
+                        Toggle(isOn: $enableRevealInFinder)
+                        {
                             Text("settings.general.package-details.reveal-in-finder.toggle")
                         }
                     }
@@ -118,8 +120,8 @@ struct GeneralPane: View
                         {
                             Text("settings.general.menubar.toggle")
                         }
-                        
-                        Toggle(isOn: $startWithoutWindow) 
+
+                        Toggle(isOn: $startWithoutWindow)
                         {
                             Text("settings.general.menubar.start-minimized.toggle")
                         }
@@ -137,7 +139,7 @@ struct GeneralPane: View
                     Text("settings.general.menubar")
                 }
 
-                LabeledContent 
+                LabeledContent
                 {
                     LaunchAtLogin.Toggle
                     {
@@ -146,7 +148,6 @@ struct GeneralPane: View
                 } label: {
                     Text("settings.general.launch-at-login")
                 }
-
             }
         }
     }

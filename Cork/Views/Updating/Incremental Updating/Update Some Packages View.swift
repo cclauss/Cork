@@ -98,6 +98,7 @@ struct UpdateSomePackagesView: View
                         appState.showAlert(errorToShow: .couldNotSynchronizePackages)
                     }
                 }
+
             case .finished:
                 DisappearableSheet
                 {

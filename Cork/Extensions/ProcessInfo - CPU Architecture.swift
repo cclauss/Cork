@@ -18,20 +18,22 @@ extension ProcessInfo
     {
         var sysinfo = utsname()
         let result = uname(&sysinfo)
-        guard result == EXIT_SUCCESS else
+        guard result == EXIT_SUCCESS
+        else
         {
             return nil
         }
-        
+
         let data = Data(bytes: &sysinfo.machine, count: Int(_SYS_NAMELEN))
-        
-        guard let identifier = String(bytes: data, encoding: .ascii) else
+
+        guard let identifier = String(bytes: data, encoding: .ascii)
+        else
         {
             return nil
         }
-        
+
         let architectureString: String = identifier.trimmingCharacters(in: .controlCharacters)
-        
+
         if architectureString.starts(with: "arm")
         {
             return .arm

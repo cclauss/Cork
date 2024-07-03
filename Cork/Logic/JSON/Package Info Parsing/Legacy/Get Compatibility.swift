@@ -18,7 +18,7 @@ func getPackageCompatibilityFromJSON(json: JSON, package: BrewPackage) throws ->
 {
     if !package.isCask
     {
-        var checkingResult: Bool = false
+        var checkingResult = false
 
         do
         {

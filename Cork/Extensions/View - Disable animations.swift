@@ -12,9 +12,9 @@ extension View
 {
     @ViewBuilder func allAnimationsDisabled() -> some View
     {
-        self
-            .transaction { transaction in
-                transaction.animation = nil
-            }
+        transaction
+        { transaction in
+            transaction.animation = nil
+        }
     }
 }

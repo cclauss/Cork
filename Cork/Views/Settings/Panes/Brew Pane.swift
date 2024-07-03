@@ -77,7 +77,7 @@ struct BrewPane: View
                         .font(.subheadline)
                         .foregroundColor(.gray)
                 }
-                
+
                 CustomHomebrewExecutableView()
             }
         }

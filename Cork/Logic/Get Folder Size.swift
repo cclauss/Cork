@@ -52,6 +52,6 @@ func directorySize(url: URL) -> Int64
             size += Int64(fileSizeResourceValue.fileSize ?? 0)
         }
     }
-    
+
     return size
 }
