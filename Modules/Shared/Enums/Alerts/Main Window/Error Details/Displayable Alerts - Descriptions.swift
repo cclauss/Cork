@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension DisplayableAlert
+public extension DisplayableAlert
 {
     /// The bold text at the top of the error
     var errorDescription: String?

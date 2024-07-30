@@ -10,12 +10,12 @@ import AppKit
 import DavidFoundation
 
 /// A representation of a Homebrew package
-struct BrewPackage: Identifiable, Equatable, Hashable
+public struct BrewPackage: Identifiable, Equatable, Hashable, Sendable
 {
-    var id = UUID()
-    let name: String
+    public var id = UUID()
+    public let name: String
     
-    lazy var sanitizedName: String? =
+    public lazy var sanitizedName: String? =
     {
         var packageNameWithoutTap: String
         { /// First, remove the tap name from the package name if it has it
@@ -53,40 +53,40 @@ struct BrewPackage: Identifiable, Equatable, Hashable
         }
     }()
 
-    let type: PackageType
-    var isTagged: Bool = false
+    public let type: PackageType
+    public var isTagged: Bool = false
     
-    let installedOn: Date?
-    let versions: [String]
+    public let installedOn: Date?
+    public let versions: [String]
     
-    var installedIntentionally: Bool = true
+    public var installedIntentionally: Bool = true
     
-    let sizeInBytes: Int64?
+    public let sizeInBytes: Int64?
     
-    var isBeingModified: Bool = false
+    public var isBeingModified: Bool = false
     
-    func getFormattedVersions() -> String
+    public func getFormattedVersions() -> String
     {
         return self.versions.formatted(.list(type: .and))
     }
     
-    mutating func changeTaggedStatus() -> Void
+    public mutating func changeTaggedStatus() -> Void
     {
         self.isTagged.toggle()
     }
     
-    mutating func changeBeingModifiedStatus() -> Void
+    public mutating func changeBeingModifiedStatus() -> Void
     {
         self.isBeingModified.toggle()
     }
     
-    mutating func purgeSanitizedName() -> Void
+    public mutating func purgeSanitizedName() -> Void
     {
         self.sanitizedName = nil
     }
     
     /// Open the location of this package in Finder
-    func revealInFinder() throws
+    public func revealInFinder() throws
     {
         
         enum FinderRevealError: Error

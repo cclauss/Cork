@@ -9,9 +9,9 @@ import Foundation
 import SwiftUI
 import Charts
 
-struct CachedDownload: Identifiable, Hashable
+public struct CachedDownload: Identifiable, Hashable
 {
-    var id: UUID = UUID()
+    public var id: UUID = UUID()
 
     let packageName: String
     let sizeInBytes: Int

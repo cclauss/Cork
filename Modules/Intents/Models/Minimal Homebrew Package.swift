@@ -9,21 +9,21 @@ import AppIntents
 import Foundation
 import CorkShared
 
-struct MinimalHomebrewPackage: Identifiable, Hashable, AppEntity
+public struct MinimalHomebrewPackage: Identifiable, Hashable, AppEntity
 {
-    var id: UUID = UUID()
+    public var id: UUID = UUID()
 
-    var name: String
+    public var name: String
 
-    var type: PackageType
+    public var type: PackageType
     
-    var installDate: Date?
+    public var installDate: Date?
     
-    var installedIntentionally: Bool
+    public var installedIntentionally: Bool
 
-    static var typeDisplayRepresentation: TypeDisplayRepresentation = .init(name: "intents.type.minimal-homebrew-package")
+    public static var typeDisplayRepresentation: TypeDisplayRepresentation = .init(name: "intents.type.minimal-homebrew-package")
 
-    var displayRepresentation: DisplayRepresentation
+    public var displayRepresentation: DisplayRepresentation
     {
         DisplayRepresentation(
             title: "\(self.name)",
@@ -31,12 +31,14 @@ struct MinimalHomebrewPackage: Identifiable, Hashable, AppEntity
         )
     }
 
-    static var defaultQuery = MinimalHomebrewPackageIntentQuery()
+    public static var defaultQuery = MinimalHomebrewPackageIntentQuery()
 }
 
-struct MinimalHomebrewPackageIntentQuery: EntityQuery
+public struct MinimalHomebrewPackageIntentQuery: EntityQuery
 {
-    func entities(for _: [UUID]) async throws -> [MinimalHomebrewPackage]
+    public init() {}
+    
+    public func entities(for _: [UUID]) async throws -> [MinimalHomebrewPackage]
     {
         return .init()
     }

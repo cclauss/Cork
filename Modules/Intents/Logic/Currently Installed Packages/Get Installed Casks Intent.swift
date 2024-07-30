@@ -23,12 +23,12 @@ struct GetInstalledCasksIntent: AppIntent
         
         if allowAccessToFile
         {
-            let installedFormulae = await loadUpPackages(whatToLoad: .cask, appState: AppState())
+            let installedFormulae = await loadUpPackages(whatToLoad: .cask)
             
             AppConstants.brewCaskPath.stopAccessingSecurityScopedResource()
             
             let minimalPackages: [MinimalHomebrewPackage] = installedFormulae.map { package in
-                return .init(name: package.name, type: .cask, installDate: package.installedOn, installedIntentionally: true)
+                return MinimalHomebrewPackage(name: package.name, type: .cask, installDate: package.installedOn, installedIntentionally: true)
             }
             
             return .result(value: minimalPackages)

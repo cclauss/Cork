@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum BrewfileImportStage
+public enum BrewfileImportStage
 {
     case importing, finished
 }

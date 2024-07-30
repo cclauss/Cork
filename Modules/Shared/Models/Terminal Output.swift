@@ -7,13 +7,13 @@
 
 import Foundation
 
-struct TerminalOutput
+public struct TerminalOutput: Sendable
 {
-    var standardOutput: String
-    var standardError: String
+    public var standardOutput: String
+    public var standardError: String
 }
 
-enum StreamedTerminalOutput
+public enum StreamedTerminalOutput
 {
     case standardOutput(String)
     case standardError(String)

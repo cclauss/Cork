@@ -9,12 +9,12 @@ import Foundation
 import Charts
 import AppIntents
 
-enum PackageType: String, CustomStringConvertible, Plottable, AppEntity
+public enum PackageType: String, CustomStringConvertible, Plottable, AppEntity
 {
     case formula
     case cask
     
-    var description: String
+    public var description: String
     {
         switch self
         {
@@ -25,9 +25,9 @@ enum PackageType: String, CustomStringConvertible, Plottable, AppEntity
         }
     }
     
-    static var typeDisplayRepresentation: TypeDisplayRepresentation = .init(name: "package-details.type")
+    public static var typeDisplayRepresentation: TypeDisplayRepresentation = .init(name: "package-details.type")
     
-    var displayRepresentation: DisplayRepresentation
+    public var displayRepresentation: DisplayRepresentation
     {
         switch self {
             case .formula:

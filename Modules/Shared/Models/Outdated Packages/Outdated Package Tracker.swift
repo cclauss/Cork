@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import CorkShared
 
 @MainActor
 class OutdatedPackageTracker: ObservableObject, Sendable

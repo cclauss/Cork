@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CorkShared
 
 struct OutdatedPackage: Identifiable, Equatable, Hashable
 {

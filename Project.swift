@@ -66,11 +66,11 @@ let project = Project(
             infoPlist: .extendingDefault(with: [:]),
             sources: [
                 "Modules/Intents/**/*.swift",
-                "Cork/App State.swift",
-                "Cork/Logic/Package Loading/**/*.swift"
+                "Cork/App State.swift"
             ], resources: [
                 "Modules/Shared/Logic/Helpers/Programs/Sudo Helper"
             ], dependencies: [
+                .target(name: "CorkShared"),
                 .external(name: "DavidFoundation")
             ]
         ),

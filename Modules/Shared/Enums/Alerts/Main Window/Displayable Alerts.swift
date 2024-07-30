@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum DisplayableAlert: LocalizedError
+public enum DisplayableAlert: LocalizedError
 {
     case couldNotLoadAnyPackages(Error), couldNotLoadCertainPackage(String, URL)
     case licenseCheckingFailedDueToAuthorizationComplexNotBeingEncodedProperly, licenseCheckingFailedDueToNoInternet, licenseCheckingFailedDueToTimeout, licenseCheckingFailedForOtherReason(localizedDescription: String)

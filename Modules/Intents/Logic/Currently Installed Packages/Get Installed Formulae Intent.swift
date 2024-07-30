@@ -31,12 +31,12 @@ struct GetInstalledFormulaeIntent: AppIntent
         
         if allowAccessToFile
         {
-            let installedFormulae = await loadUpPackages(whatToLoad: .formula, appState: AppState())
+            let installedFormulae = await loadUpPackages(whatToLoad: .formula)
             
             AppConstants.brewCellarPath.stopAccessingSecurityScopedResource()
             
             var minimalPackages: [MinimalHomebrewPackage] = installedFormulae.map { package in
-                return .init(name: package.name, type: .formula, installedIntentionally: package.installedIntentionally)
+                return MinimalHomebrewPackage(name: package.name, type: .formula, installedIntentionally: package.installedIntentionally)
             }
             
             if getOnlyManuallyInstalledPackages

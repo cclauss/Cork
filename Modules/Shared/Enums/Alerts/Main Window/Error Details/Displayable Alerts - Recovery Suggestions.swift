@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension DisplayableAlert
+public extension DisplayableAlert
 {
     var recoverySuggestion: String?
     {

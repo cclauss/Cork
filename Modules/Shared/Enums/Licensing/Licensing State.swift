@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum LicensingState
+public enum LicensingState
 {
     case notBoughtOrHasNotActivatedDemo
     

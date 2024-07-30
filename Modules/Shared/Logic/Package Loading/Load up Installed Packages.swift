@@ -8,7 +8,7 @@
 import Foundation
 
 @MainActor
-func loadUpPackages(whatToLoad: PackageType, appState: AppState) async -> Set<BrewPackage>
+public func loadUpPackages(whatToLoad: PackageType, appState: AppState? = nil) async -> Set<BrewPackage>
 {
     AppConstants.logger.info("Started \(whatToLoad == .formula ? "Formula" : "Cask", privacy: .public) loading task at \(Date(), privacy: .public)")
 
@@ -26,16 +26,19 @@ func loadUpPackages(whatToLoad: PackageType, appState: AppState) async -> Set<Br
     }
     catch let packageLoadingError as PackageLoadingError
     {
-        switch packageLoadingError
+        if let appState
         {
-        case .failedWhileLoadingPackages:
-            appState.showAlert(errorToShow: .couldNotLoadAnyPackages(packageLoadingError))
-        case .failedWhileLoadingCertainPackage(let offendingPackage, let offendingPackageURL):
-            appState.showAlert(errorToShow: .couldNotLoadCertainPackage(offendingPackage, offendingPackageURL))
-        case .packageDoesNotHaveAnyVersionsInstalled(let offendingPackage):
-            appState.showAlert(errorToShow: .installedPackageHasNoVersions(corruptedPackageName: offendingPackage))
-        case .packageIsNotAFolder(let offendingFile, let offendingFileURL):
-            appState.showAlert(errorToShow: .installedPackageIsNotAFolder(itemName: offendingFile, itemURL: offendingFileURL))
+            switch packageLoadingError
+            {
+                case .failedWhileLoadingPackages:
+                    appState.showAlert(errorToShow: .couldNotLoadAnyPackages(packageLoadingError))
+                case .failedWhileLoadingCertainPackage(let offendingPackage, let offendingPackageURL):
+                    appState.showAlert(errorToShow: .couldNotLoadCertainPackage(offendingPackage, offendingPackageURL))
+                case .packageDoesNotHaveAnyVersionsInstalled(let offendingPackage):
+                    appState.showAlert(errorToShow: .installedPackageHasNoVersions(corruptedPackageName: offendingPackage))
+                case .packageIsNotAFolder(let offendingFile, let offendingFileURL):
+                    appState.showAlert(errorToShow: .installedPackageIsNotAFolder(itemName: offendingFile, itemURL: offendingFileURL))
+            }
         }
     }
     catch
