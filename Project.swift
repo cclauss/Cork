@@ -26,7 +26,7 @@ let project = Project(
                 "Cork/**/*.xcassets",
                 "Cork/**/*.xcstrings",
                 "PrivacyInfo.xcprivacy",
-                "Modules/SharedLogic/Helpers/Programs/Sudo Helper"
+                "Modules/Shared/Logic/Helpers/Programs/Sudo Helper"
             ], dependencies: [
                 // .target(name: "CorkHelp"),
                 .target(name: "CorkShared"),
@@ -53,7 +53,7 @@ let project = Project(
             sources: [
                 "Modules/Shared/**/*.swift"
             ], resources: [
-                "Modules/SharedLogic/Helpers/Programs/Sudo Helper"
+                "Modules/Shared/Logic/Helpers/Programs/Sudo Helper"
             ], dependencies: [
                 .external(name: "DavidFoundation")
             ]
@@ -69,7 +69,7 @@ let project = Project(
                 "Cork/App State.swift",
                 "Cork/Logic/Package Loading/**/*.swift"
             ], resources: [
-                "Modules/SharedLogic/Helpers/Programs/Sudo Helper"
+                "Modules/Shared/Logic/Helpers/Programs/Sudo Helper"
             ], dependencies: [
                 .external(name: "DavidFoundation")
             ]

@@ -8,11 +8,6 @@
 import Foundation
 import SwiftUI
 
-enum PackageLoadingError: Error
-{
-    case failedWhileLoadingPackages(failureReason: LocalizedStringKey?), failedWhileLoadingCertainPackage(String, URL), packageDoesNotHaveAnyVersionsInstalled(String), packageIsNotAFolder(String, URL)
-}
-
 func getContentsOfFolder(targetFolder: URL) async throws -> Set<BrewPackage>
 {
     do
