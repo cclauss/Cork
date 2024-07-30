@@ -29,6 +29,7 @@ let project = Project(
                 "Cork/Logic/Helpers/Programs/Sudo Helper"
             ], dependencies: [
                 // .target(name: "CorkHelp"),
+                .target(name: "CorkIntents"),
                 .external(name: "LaunchAtLogin"),
                 .external(name: "DavidFoundation")
             ], settings: .settings(configurations: [
@@ -41,6 +42,16 @@ let project = Project(
                     xcconfig: .relativeToRoot("xcconfigs/Cork.xcconfig")
                 )
             ])
+        ),
+        .target(
+            name: "CorkIntents",
+            destinations: [.mac],
+            product: .staticLibrary,
+            bundleId: "com.davidbures.cork-intents",
+            infoPlist: .extendingDefault(with: [:]),
+            sources: [
+                "Modules/Intents/**/*.swift"
+            ]
         ),
         .target(
             name: "CorkHelp",
