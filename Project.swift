@@ -26,9 +26,10 @@ let project = Project(
                 "Cork/**/*.xcassets",
                 "Cork/**/*.xcstrings",
                 "PrivacyInfo.xcprivacy",
-                "Cork/Logic/Helpers/Programs/Sudo Helper"
+                "Modules/SharedLogic/Helpers/Programs/Sudo Helper"
             ], dependencies: [
                 // .target(name: "CorkHelp"),
+                .target(name: "CorkShared"),
                 .target(name: "CorkIntents"),
                 .external(name: "LaunchAtLogin"),
                 .external(name: "DavidFoundation")
@@ -44,13 +45,33 @@ let project = Project(
             ])
         ),
         .target(
+            name: "CorkShared",
+            destinations: [.mac],
+            product: .staticLibrary,
+            bundleId: "com.davidbures.cork-shared",
+            infoPlist: .extendingDefault(with: [:]),
+            sources: [
+                "Modules/Shared/**/*.swift"
+            ], resources: [
+                "Modules/SharedLogic/Helpers/Programs/Sudo Helper"
+            ], dependencies: [
+                .external(name: "DavidFoundation")
+            ]
+        ),
+        .target(
             name: "CorkIntents",
             destinations: [.mac],
             product: .staticLibrary,
             bundleId: "com.davidbures.cork-intents",
             infoPlist: .extendingDefault(with: [:]),
             sources: [
-                "Modules/Intents/**/*.swift"
+                "Modules/Intents/**/*.swift",
+                "Cork/App State.swift",
+                "Cork/Logic/Package Loading/**/*.swift"
+            ], resources: [
+                "Modules/SharedLogic/Helpers/Programs/Sudo Helper"
+            ], dependencies: [
+                .external(name: "DavidFoundation")
             ]
         ),
         .target(
