@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+import CorkShared
 
 private enum PackageRetrievalByUUIDError: Error
 {

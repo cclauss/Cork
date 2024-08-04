@@ -7,6 +7,7 @@
 
 import Foundation
 import AppKit
+import CorkShared
 
 func submitSystemVersion() async throws -> Void
 {

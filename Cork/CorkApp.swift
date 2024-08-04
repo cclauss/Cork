@@ -8,6 +8,8 @@
 import SwiftUI
 import UserNotifications
 import DavidFoundation
+import CorkShared
+import CorkNotifications
 
 @main
 struct CorkApp: App
